@@ -19,6 +19,8 @@ timeout_ms: usize,
 user_agent: [:0]const u8,
 ca_bundle: ?Buffer,
 
+pub const SSLRequest = enum(c_int) { curlusessl_none = c.CURLUSESSL_NONE, curlusessl_try = c.CURLUSESSL_TRY, curlusessl_control = c.CURLUSESSL_CONTROL, curlusessl_all = c.CURLUSESSL_ALL };
+
 pub const Method = enum {
     GET,
     POST,
@@ -360,6 +362,11 @@ pub fn setSSLVerifyPeer(self: Self, enable: bool) !void {
 pub fn setSSLVerifyHost(self: Self, enable: bool) !void {
     const param: c_long = @intCast(@intFromBool(enable));
     try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_SSL_VERIFYHOST, param));
+}
+
+/// Set CURLOPT_USE_SSL
+pub fn setUseSSL(self: Self, mode: SSLRequest) !void {
+    try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_USE_SSL, @intFromEnum(mode)));
 }
 
 pub fn setUnixSocketPath(self: Self, path: [:0]const u8) !void {
