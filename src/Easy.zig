@@ -374,6 +374,12 @@ pub fn setUseSSL(self: Self, mode: SSLRequest) !void {
 pub fn setLoginOptions(self: Self, opts: [:0]const u8) !void {
     try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_LOGIN_OPTIONS, opts.ptr));
 }
+
+/// Set CURLOPT_SASL_AUTHZID - authorization identity (identity to act as)
+pub fn setSaslAuthzid(self: Self, opts: [:0]const u8) !void {
+    try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_SASL_AUTHZID, opts.ptr));
+}
+
 pub fn setUnixSocketPath(self: Self, path: [:0]const u8) !void {
     try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_UNIX_SOCKET_PATH, path.ptr));
 }
