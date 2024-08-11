@@ -30,6 +30,7 @@ pub const Method = enum {
     DELETE,
     UIDL,
     DELE,
+    NOOP,
 
     fn asString(self: Method) [:0]const u8 {
         return @tagName(self);
