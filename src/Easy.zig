@@ -31,6 +31,7 @@ pub const Method = enum {
     UIDL,
     DELE,
     NOOP,
+    STAT,
 
     fn asString(self: Method) [:0]const u8 {
         return @tagName(self);
