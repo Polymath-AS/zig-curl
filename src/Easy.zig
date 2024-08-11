@@ -369,6 +369,11 @@ pub fn setUseSSL(self: Self, mode: SSLRequest) !void {
     try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_USE_SSL, @intFromEnum(mode)));
 }
 
+/// Set CURLOPT_LOGIN_OPTIONS
+/// See [CURLOPT_LOGIN_OPTIONS explained](https://curl.se/libcurl/c/CURLOPT_LOGIN_OPTIONS.html) for more info
+pub fn setLoginOptions(self: Self, opts: [:0]const u8) !void {
+    try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_LOGIN_OPTIONS, opts.ptr));
+}
 pub fn setUnixSocketPath(self: Self, path: [:0]const u8) !void {
     try checkCode(c.curl_easy_setopt(self.handle, c.CURLOPT_UNIX_SOCKET_PATH, path.ptr));
 }
