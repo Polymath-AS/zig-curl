@@ -29,6 +29,7 @@ pub const Method = enum {
     PATCH,
     DELETE,
     UIDL,
+    DELE,
 
     fn asString(self: Method) [:0]const u8 {
         return @tagName(self);
